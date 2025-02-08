@@ -8,7 +8,7 @@ import java.util.Properties;
 public class PropertyHandler {
 
     protected static Properties prop = new Properties();
-    public static final String SELGRID_URL_KEY="selenium.gridurl";
+    public static final String  SELGRID_URL_KEY="selenium.gridurl";
 
     static {
         try {

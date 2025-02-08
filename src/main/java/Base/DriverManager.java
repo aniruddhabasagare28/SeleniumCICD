@@ -22,9 +22,6 @@ public class DriverManager {
                 throw new RuntimeException(e);
             }
         }
-        else {
-            threadLocalDriver.set(new ChromeDriver(getChromeOptions()));
-        }
         threadLocalDriver.get().manage().window().maximize();
         return threadLocalDriver.get();
     }
@@ -39,9 +36,13 @@ public class DriverManager {
 
     private static String getGridUrl(){
         String gridUrl=null;
-        String gridUrlProp=PropertyHandler.getProperty(PropertyHandler.SELGRID_URL_KEY);
+        String gridUrlProp=System.getProperty("selenium.gridurl", "http://localhost:4444/wd/hub");
+        System.out.println("Running tests on Selenium Grid: " + gridUrl);
         if(gridUrlProp!=null && !gridUrlProp.isEmpty()){
-            gridUrl =  String.format("http://%s:4444",gridUrlProp);
+            gridUrl =  String.format(gridUrlProp);
+        }else{
+
+            gridUrl = System.getProperty("selenium.gridurl");
         }
         return gridUrl;
     }
